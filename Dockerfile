@@ -2,7 +2,7 @@ FROM node:25-alpine AS frontend
 WORKDIR /app
 RUN apk add --no-cache git
 RUN git clone https://github.com/andrewbrdk/queryagent /app
-RUN npm install
+RUN npm ci
 RUN npm run build
 
 FROM golang:1.26 AS backend
