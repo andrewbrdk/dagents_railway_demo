@@ -1,7 +1,7 @@
 FROM node:25-alpine AS frontend
 WORKDIR /app
 RUN apk add --no-cache git
-RUN git clone https://github.com/andrewbrdk/queryagent /app
+RUN git clone https://github.com/andrewbrdk/DataAgents /app
 RUN npm ci
 RUN npm run build
 
@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends pgformatter \
 WORKDIR /app
 COPY --from=frontend /app /app
 RUN mkdir -p /app/logs
-RUN go get queryagent
+RUN go get dagents
 RUN go build
 #todo: clean
 EXPOSE 8080
-ENTRYPOINT ["/app/queryagent"]
+ENTRYPOINT ["/app/dagents"]
